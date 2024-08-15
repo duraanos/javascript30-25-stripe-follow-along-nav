@@ -4,19 +4,7 @@ const links = document.querySelectorAll('.cool > li');
 const dropdownBackground = document.querySelector('.dropdownBackground');
 const navBar = document.querySelector('.top');
 
-const handleEnter = function () {
-  this.classList.add('trigger-enter');
-  setTimeout(
-    () =>
-      this.classList.contains('trigger-enter') &&
-      this.classList.add('trigger-enter-active'),
-    150
-  );
-
-  dropdownBackground.classList.add('open');
-
-  const dropdown = this.querySelector('.dropdown');
-  console.log(dropdown);
+const setDropdownCoords = function (dropdown) {
   const dropdownCoords = dropdown.getBoundingClientRect();
   const navBarCoords = navBar.getBoundingClientRect();
 
@@ -33,6 +21,20 @@ const handleEnter = function () {
     'transform',
     `translate(${coords.left}px, ${coords.top}px)`
   );
+};
+
+const handleEnter = function () {
+  this.classList.add('trigger-enter');
+  setTimeout(
+    () =>
+      this.classList.contains('trigger-enter') &&
+      this.classList.add('trigger-enter-active'),
+    150
+  );
+
+  dropdownBackground.classList.add('open');
+  const dropdown = this.querySelector('.dropdown');
+  setDropdownCoords(dropdown);
 };
 
 const handleLeave = function () {
